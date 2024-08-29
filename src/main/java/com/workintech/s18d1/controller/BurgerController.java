@@ -11,7 +11,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/burgers")
+@RequestMapping("/burger")
 public class BurgerController {
     private BurgerDao burgerDao;
 
@@ -38,17 +38,17 @@ public class BurgerController {
         return burgerDao.findById(id);
     }
 
-    @GetMapping("/findByPrice")
-    public List<Burger> getBurgerByPrice(@RequestBody double price){
+    @GetMapping("/price/{price}")
+    public List<Burger> getBurgerByPrice(@PathVariable double price){
         return burgerDao.findByPrice(price);
     }
 
-    @GetMapping("/findByBreadType")
-    public List<Burger> getBurgerByBreadType(@RequestBody BreadType breadType){
+    @GetMapping("/breadType/{breadType}")
+    public List<Burger> getBurgerByBreadType(@PathVariable BreadType breadType){
         return burgerDao.findByBreadType(breadType);
     }
-    @GetMapping("/findByContent")
-    public List<Burger> getBurgerByContent(@RequestBody String content){
+    @GetMapping("/content/{content}")
+    public List<Burger> getBurgerByContent(@PathVariable String content){
         return burgerDao.findByContent(content);
     }
 
@@ -56,6 +56,11 @@ public class BurgerController {
     public Burger actualize(@PathVariable Long id){
         BurgerValidation.isIdValid(id);
         Burger burger = burgerDao.findById(id);
+        return burgerDao.update(burger);
+    }
+
+    @PutMapping
+    public Burger actualize(@RequestBody Burger burger){
         return burgerDao.update(burger);
     }
 
