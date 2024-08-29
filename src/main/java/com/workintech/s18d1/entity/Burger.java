@@ -19,7 +19,7 @@ public class Burger {
     private String name;
 
     @Column(name = "price")
-    private double price;
+    private Double price;
 
     @Column(name = "is_vegan")
     private Boolean isVegan;
